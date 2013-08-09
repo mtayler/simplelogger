@@ -1,9 +1,5 @@
-Title: README
-Author: Tayler Mulligan
-Date: August 9, 2013
-
-simplelog
-=========
+simplelogger
+============
 
 Very simple Python logging
 
