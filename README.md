@@ -14,6 +14,7 @@ Usage:
 Create a new `Logger` object, and call `start` to begin logging.
 
 Eg.
+    
     import simplelogger
 
     def main():
