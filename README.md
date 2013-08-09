@@ -3,7 +3,7 @@ simplelog
 
 Very simple Python logging
 
-A small module used for basic logging purposes. Logs to stdout.
+A small module used for basic logging purposes. Logs to console.
 
 Installation:
 -------------
