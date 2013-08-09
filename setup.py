@@ -21,7 +21,7 @@ version = '0.1.2'
 
 setup(name='Simple Log',
       version=version,
-      packages=['simplelog'],
+      packages=['simplelogger'],
       description='Simple Logging Utility',
       author='Tayler Mulligan',
       author_email='mulligantayler@gmail.com'

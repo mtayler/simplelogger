@@ -1,1 +1,1 @@
-from simplelog import *
+from simplelogger import *
