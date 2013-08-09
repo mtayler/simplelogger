@@ -17,7 +17,7 @@
 
 from distutils.core import setup
 
-version = '0.1.2'
+version = '1.0'
 
 setup(name='Simple Log',
       version=version,

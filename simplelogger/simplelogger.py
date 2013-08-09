@@ -20,25 +20,50 @@ class Logger(object):
     """Basic logging class"""
     
     def __init__(self):
-        logging = False
+        self.logging = False
     
     def start(self):
-        global logging
-        logging = True
+        """
+            Logger.start()
+            Begin logging
+        """
+            
+        self.logging = True
         self.timestamp("Logging Started")
 
     def end(self, exit_code=0, message=''):
-        if logging:
+        """
+            Logger.end(exit_code=0, message='')
+            Stops logging, logs exit code and optional message
+        """
+        if self.logging:
+            self.logging = False
             print "Exited with status: {code}. {msg}\n".format(code=exit_code,
                                                                msg=message
                                                                )
 
     def stop(self):
-        if logging:
-            logging = False
+        """
+            Logger.stop()
+            Stop logging, doesn't print exit code
+        """
+        
+        if self.logging:
+            self.logging = False
+
 
     def timestamp(self, message):
-        if logging:
+        """
+            Logger.timestamp(message)
+            Logs with an added timestamp to the message
+        """
+        if self.logging:
             print "{timestamp}: {message}".format(message=message,
                                                   timestamp=datetime.datetime.now()
                                                   )
+
+    def exit_code(self, function, exit_code=0, message=''):
+        """
+            Logger.exit_code(function, exit_code=0, message='')
+            Logs function's exit code and optional message
+        """
