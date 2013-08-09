@@ -25,7 +25,7 @@ class Logger(object):
     def start(self):
         global logging
         logging = True
-        timestamp("Logging Started")
+        self.timestamp("Logging Started")
 
     def end(self, exit_code=0, message=''):
         if logging:
