@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# Simple Log - very simple logging
+# Simple Logger - very simple logging
 # Copyright (C) 2013  Tayler Mulligan
 #
 # This program is free software: you can redistribute it and/or modify
