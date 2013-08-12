@@ -1,4 +1,4 @@
-simplelogger
+SimpleLogger
 ============
 
 Very simple Python logging
@@ -21,6 +21,6 @@ Eg.
 
     logger = simplelogger.Logger()
 
-    logger.start()					// Begin logging
+    logger.start()					            // Begin logging
     logger.timestamp("Log this message with a timestamp")
-    logger.end(2, "An error has occured")		// Prints timestamped exit code 2 with an error message
+    logger.end(2, "An error has occured")		// Ends logging, prints timestamped exit code 2 with an error message
