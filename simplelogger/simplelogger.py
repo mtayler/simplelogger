@@ -22,13 +22,6 @@ class Logger(object):
     """Basic logging class"""
 
     def __init__(self, logging_file=None, start_on_create=False):
-        if start_on_create:
-            self.start()
-        elif not start_on_create:
-            self.logging = False
-        else:
-            raise TypeError("start_on_create must be boolean")
-
         if logging_file:
             if not os.path.exists(os.path.dirname(logging_file)):
                 os.makedirs(logging_file)
@@ -38,6 +31,13 @@ class Logger(object):
 
         else:
             self.output = sys.stdout
+
+        if start_on_create:
+            self.start()
+        elif not start_on_create:
+            self.logging = False
+        else:
+            raise TypeError("start_on_create must be boolean")
 
 
     def _write(self,text):
