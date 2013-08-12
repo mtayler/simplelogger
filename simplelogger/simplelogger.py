@@ -14,51 +14,73 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import sys
 import datetime
+import os
 
 class Logger(object):
     """Basic logging class"""
-    
-    def __init__(self):
-        self.logging = False
-    
-    
+
+    def __init__(self, logging_file=None, start_on_create=False):
+        if start_on_create:
+            self.logging = True
+        elif not start_on_create:
+            self.logging = False
+        else:
+            raise TypeError, "start_on_create must be boolean"
+
+        if logging_file:
+            if not os.path.exists(os.path.dirname(logging_file)):
+                os.makedirs(logging_file)
+
+            sys.stdout = open(logging_file, 'a+')
+            sys.stderr = open(logging_file, 'a+')
+
+
     def start(self):
         """Begin logging"""
-            
+
         self.logging = True
         self.timestamp("Logging Started")
 
 
     def end(self, exit_code=0, message=''):
-        """
-            Stops logging, logs provided exit code and optional message
-        """
+        """Stops logging, logs provided exit code and optional message"""
+
         if self.logging:
             self.logging = False
-            print "Exited with status: {code}. {msg}\n".format(code=exit_code,
+            print("Exited with status: {code}. {msg}\n".format(code=exit_code,
                                                                msg=message
-                                                               )
+                                                               ))
+            sys.stdout.close()
+            sys.stderr.close()
+
+            sys.stdout = sys.__stdout__
+            sys.stderr = sys.__stderr__
 
     def halt(self):
         """Stop logging, doesn't print exit code"""
-        
+
         if self.logging:
+            self.timestamp("Logging halted")
             self.logging = False
-    
-    
+
+
     def resume(self):
         """Resume logging"""
-        
+
         self.logging = True
+        self.timestamp("Logging resumed")
 
 
     def timestamp(self, message):
         """Logs with an added timestamp to the message"""
         if self.logging:
-            print "{timestamp}: {message}".format(message=message,
+            print("{timestamp}: {message}".format(message=message,
                                                   timestamp=datetime.datetime.now()
-                                                  )
+                                                  ))
+
 
     def exit_code(self, function, exit_code=0, message=''):
         """Logs provided exit code and optional message, continues logging"""
+        #TODO

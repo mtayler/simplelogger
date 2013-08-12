@@ -17,10 +17,10 @@
 
 from distutils.core import setup
 
-version = '1.0'
+__version__ = '1.0.1'
 
-setup(name='Simple Log',
-      version=version,
+setup(name='SimpleLogger',
+      version=__version__,
       packages=['simplelogger'],
       description='Simple Logging Utility',
       author='Tayler Mulligan',
