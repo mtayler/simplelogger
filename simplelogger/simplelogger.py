@@ -1,4 +1,4 @@
-# Simple Log - very simple logging
+# Simple Logger - very simple logging
 # Copyright (C) 2013  Tayler Mulligan
 #
 # This program is free software: you can redistribute it and/or modify
@@ -22,19 +22,17 @@ class Logger(object):
     def __init__(self):
         self.logging = False
     
+    
     def start(self):
-        """
-            Logger.start()
-            Begin logging
-        """
+        """Begin logging"""
             
         self.logging = True
         self.timestamp("Logging Started")
 
+
     def end(self, exit_code=0, message=''):
         """
-            Logger.end(exit_code=0, message='')
-            Stops logging, logs exit code and optional message
+            Stops logging, logs provided exit code and optional message
         """
         if self.logging:
             self.logging = False
@@ -42,28 +40,25 @@ class Logger(object):
                                                                msg=message
                                                                )
 
-    def stop(self):
-        """
-            Logger.stop()
-            Stop logging, doesn't print exit code
-        """
+    def halt(self):
+        """Stop logging, doesn't print exit code"""
         
         if self.logging:
             self.logging = False
+    
+    
+    def resume(self):
+        """Resume logging"""
+        
+        self.logging = True
 
 
     def timestamp(self, message):
-        """
-            Logger.timestamp(message)
-            Logs with an added timestamp to the message
-        """
+        """Logs with an added timestamp to the message"""
         if self.logging:
             print "{timestamp}: {message}".format(message=message,
                                                   timestamp=datetime.datetime.now()
                                                   )
 
     def exit_code(self, function, exit_code=0, message=''):
-        """
-            Logger.exit_code(function, exit_code=0, message='')
-            Logs function's exit code and optional message
-        """
+        """Logs provided exit code and optional message, continues logging"""
