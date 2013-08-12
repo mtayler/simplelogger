@@ -28,5 +28,6 @@ setup(name='SimpleLogger',
       packages=['simplelogger'],
       description='Simple Logging Utility',
       author='Tayler Mulligan',
-      author_email='mulligantayler@gmail.com'
+      author_email='mulligantayler@gmail.com',
+      url='https://github.com/rock-fish/simplelogger'
      )

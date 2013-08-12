@@ -1,6 +1,8 @@
 SimpleLogger
 ============
 
+[![PyPI version](https://badge.fury.io/py/SimpleLogger.png)](http://badge.fury.io/py/SimpleLogger)
+
 Very simple Python logging
 
 A small module used for basic logging purposes. Logs to console.
