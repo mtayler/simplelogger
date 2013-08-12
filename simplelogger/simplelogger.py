@@ -27,7 +27,7 @@ class Logger(object):
         elif not start_on_create:
             self.logging = False
         else:
-            raise TypeError, "start_on_create must be boolean"
+            raise TypeError("start_on_create must be boolean")
 
         if logging_file:
             if not os.path.exists(os.path.dirname(logging_file)):
@@ -49,9 +49,9 @@ class Logger(object):
 
         if self.logging:
             self.logging = False
-            print "Exited with status: {code}. {msg}\n".format(code=exit_code,
+            print("Exited with status: {code}. {msg}\n".format(code=exit_code,
                                                                msg=message
-                                                               )
+                                                               ))
             sys.stdout.close()
             sys.stderr.close()
 
@@ -76,9 +76,9 @@ class Logger(object):
     def timestamp(self, message):
         """Logs with an added timestamp to the message"""
         if self.logging:
-            print "{timestamp}: {message}".format(message=message,
+            print("{timestamp}: {message}".format(message=message,
                                                   timestamp=datetime.datetime.now()
-                                                  )
+                                                  ))
 
 
     def exit_code(self, function, exit_code=0, message=''):

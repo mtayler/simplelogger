@@ -17,10 +17,14 @@
 
 from distutils.core import setup
 
-__version__ = '1.0.1'
+__version__ = '1.1'
 
 setup(name='SimpleLogger',
       version=__version__,
+      classifiers=[
+          'Programming Language :: Python',
+          'Programming Language :: Python :: 3'
+          ],
       packages=['simplelogger'],
       description='Simple Logging Utility',
       author='Tayler Mulligan',
