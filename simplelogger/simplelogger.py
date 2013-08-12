@@ -23,7 +23,7 @@ class Logger(object):
 
     def __init__(self, logging_file=None, start_on_create=False):
         if start_on_create:
-            self.logging = True
+            self.start()
         elif not start_on_create:
             self.logging = False
         else:
