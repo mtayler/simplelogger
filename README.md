@@ -17,8 +17,6 @@ Eg.
 
     import simplelogger
 
-    def main():
-
     logger = simplelogger.Logger()
 
     logger.start()				// Begin logging
