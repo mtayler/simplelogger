@@ -36,8 +36,6 @@ class Logger(object):
             self.start()
         elif not start_on_create:
             self.logging = False
-        else:
-            raise TypeError("start_on_create must be boolean")
 
 
     def _write(self,text):
