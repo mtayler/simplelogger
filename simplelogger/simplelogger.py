@@ -33,8 +33,16 @@ class Logger(object):
             if not os.path.exists(os.path.dirname(logging_file)):
                 os.makedirs(logging_file)
 
-            sys.stdout = open(logging_file, 'a+')
+            self.output = open(logging_file, 'a+')
             sys.stderr = open(logging_file, 'a+')
+
+        else:
+            self.output = sys.stdout
+
+
+    def _write(self,text):
+        self.output.write(text+'\n')
+        self.output.flush()
 
 
     def start(self):
@@ -49,14 +57,12 @@ class Logger(object):
 
         if self.logging:
             self.logging = False
-            print("Exited with status: {code}. {msg}\n".format(code=exit_code,
+            self._write("Exited with status: {code}. {msg}\n".format(code=exit_code,
                                                                msg=message
                                                                ))
-            sys.stdout.close()
             sys.stderr.close()
-
-            sys.stdout = sys.__stdout__
             sys.stderr = sys.__stderr__
+
 
     def halt(self):
         """Stop logging, doesn't print exit code"""
@@ -76,7 +82,7 @@ class Logger(object):
     def timestamp(self, message):
         """Logs with an added timestamp to the message"""
         if self.logging:
-            print("{timestamp}: {message}".format(message=message,
+            self._write("{timestamp}: {message}".format(message=message,
                                                   timestamp=datetime.datetime.now()
                                                   ))
 
