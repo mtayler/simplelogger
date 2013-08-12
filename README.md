@@ -26,6 +26,7 @@ Eg.
     logger.end(2, "An error has occured")	// Ends logging, prints timestamped exit code 2 with an error message
 
 To log to file:
+
     import simplelogger
 
     logger = simplelogger.Logger("path/to/file")
