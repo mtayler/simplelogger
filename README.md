@@ -13,24 +13,37 @@ Use included setup.py (`python setup.py install`)
 
 Usage:
 ------
-Create a new `Logger` object, and call `start` to begin logging.
+Create a new `Logger` object, and log away!
 
 Eg.
 
     import simplelogger
 
-    logger = simplelogger.Logger()
+    logger = simplelogger.Logger(threshold=simplelogger.INFO)
 
-    logger.start()				// Begin logging
-    logger.timestamp("Log this message with a timestamp")
-    logger.end(2, "An error has occured")	// Ends logging, prints timestamped exit code 2 with an error message
+    logger.info("'This is logged with level info'")
+    logger.warning("This is logged with level 'warning'"
+
+
+
+To show lower log levels:
+
+    import simplelogger
+
+    // to log 'info' level logs and up
+    logger = simplelogger.Logger(threshold=simplelogger.INFO)
+    logger.info("this will log")
+
+    // to log 'debug' level logs and up
+    logger = simplelogger.Logger(threshold=simplelogger.DEBUG)
+    logger.debug("this will log now too!")
+
+
 
 To log to file:
 
     import simplelogger
 
-    logger = simplelogger.Logger("path/to/file")
+    logger = simplelogger.Logger(log_file="path/to/file")
 
-    logger.start()		// Begin logging
-    logger.timestamp("Log this message to the specified file")
-    logger.end(0)		// Ends logging prints timestamped exit code 0
+    logger.warning("this is logged to file")
