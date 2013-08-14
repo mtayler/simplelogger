@@ -109,7 +109,7 @@ class Logger(object):
         self.__format__ = format
 
 
-    def log(self, text, log_level):
+    def log(self, log_level, text):
         """
         Logs text to file or standard output
 
@@ -139,7 +139,7 @@ class Logger(object):
         Args:
             text: string - text to log
         """
-        self.log(text,"debug")
+        self.log("debug",text)
 
 
     def info(self, text):
@@ -151,7 +151,7 @@ class Logger(object):
         Args:
             text: string - text to log
         """
-        self.log(text,"info")
+        self.log("info",text)
 
 
     def warning(self, text):
@@ -163,7 +163,7 @@ class Logger(object):
         Args:
             text: string - text to log
         """
-        self.log(text,"warning")
+        self.log("warning",text)
 
 
     def error(self, text):
@@ -175,7 +175,7 @@ class Logger(object):
         Args:
             text: string - text to log
         """
-        self.log(text,"error")
+        self.log("error",text)
 
 
     def critical(self, text):
@@ -187,7 +187,15 @@ class Logger(object):
         Args:
             text: string - text to log
         """
-        self.log(text,"critical")
+        self.log("critical",text)
+
+
+    def finish(self):
+        """
+        Finishes current logging session
+        """
+        self.log("info","Finished.")
+        self.__write__('')
 
 
 class FormatError(Exception):
