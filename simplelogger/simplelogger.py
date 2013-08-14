@@ -58,7 +58,7 @@ class Logger(object):
         if format == None:
             self.__format__ = '{datetime}: {level}: {text}'
         else:
-            self.__format__ = logging_format
+            self.__format__ = format
 
         if log_file:
             if not os.path.exists(os.path.dirname(log_file)):
