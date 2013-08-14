@@ -15,76 +15,150 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import sys
-import datetime
 import os
+
+from datetime import datetime, date, time
 
 class Logger(object):
     """Basic logging class"""
 
-    def __init__(self, logging_file=None, start_on_create=False):
-        if logging_file:
-            if not os.path.exists(os.path.dirname(logging_file)):
-                os.makedirs(logging_file)
+    def __init__(self, log_file=None, default_log_level=None, _format_string_=None):
+        """
+        Construct new logger
 
-            self.output = open(logging_file, 'a+')
-            sys.stderr = open(logging_file, 'a+')
+        self.Logger(default_log_level='info', log_file=None)
 
+        default_log_level sets the default logging level
+        log_file sets the file to log to if provided. Default is standard output
+        """
+        if default_log_level == None:
+            self._default_log_level_ = 'info'
+        else:
+            self._default_log_level_ = default_log_level
+
+        if _format_string_ == None:
+            self._format_string_ = '{datetime}: {level}: {text}'
+        else:
+            self._format_string_ = _format_string_
+
+        if log_file:
+            if '/' in log_file or '\\' in log_file:
+                if not os.path.exists(os.path.dirname(log_file)):
+                    os.makedirs(os.path.dirname(log_file))
+            else:
+                current_dir = os.path.dirname(__file__)
+                log_file = os.path.join(current_dir, log_file)
+
+
+            try:
+                self.output = open(log_file, 'a+')
+                sys.stderr = open(log_file, 'a+')
+            except IOError as e:
+                raise IOError("Could not open {log_file}".format(log_file=e.filename))
         else:
             self.output = sys.stdout
 
-        if start_on_create:
-            self.start()
-        elif not start_on_create:
-            self.logging = False
+        self.log("Logging Started")
 
 
-    def _write(self,text):
+    def _write(self, text):
         self.output.write(text+'\n')
         self.output.flush()
 
 
-    def start(self):
-        """Begin logging"""
+    def log_format(self, _format_string_):
+        """
+        Set custom log format
 
-        self.logging = True
-        self.timestamp("Logging Started")
-
-
-    def end(self, exit_code=0, message=''):
-        """Stops logging, logs provided exit code and optional message"""
-
-        if self.logging:
-            self.logging = False
-            self._write("Exited with status: {code}. {msg}\n".format(code=exit_code,
-                                                               msg=message
-                                                               ))
-            sys.stderr.close()
-            sys.stderr = sys.__stderr__
+        Valid format directives:
+        {time}, {datetime}, {date}, {level}, and {text}
+        """
+        self._format_string_ = _format_string_
 
 
-    def halt(self):
-        """Stop logging, doesn't print exit code"""
-
-        if self.logging:
-            self.timestamp("Logging halted")
-            self.logging = False
 
 
-    def resume(self):
-        """Resume logging"""
-
-        self.logging = True
-        self.timestamp("Logging resumed")
+    def log(self, text, log_level=None):
+        """
+        Logs text to file or standard output
 
 
-    def timestamp(self, message):
-        """Logs with an added timestamp to the message"""
-        if self.logging:
-            self._write("{timestamp}: {message}".format(message=message,
-                                                  timestamp=datetime.datetime.now()
-                                                  ))
+        Defaults to Logger object's default level, for other standard levels, it is
+        recommended to use provided the provided functions for logging various levels:
+        debug(), info(), warning(), error(), and critical().
+
+        Can be provided with custom logging levels.
+        """
+        if log_level is None:
+            log_level = self._default_log_level_
+
+        now = datetime.now()
+        self._write(self._format_string_.format(time=now.time(), datetime=now,
+                                           date=date.today(), level=log_level.upper(),
+                                           text=text
+                                          ))
 
 
-    def exit_code(self, function, exit_code=0, message=''):
-        """Logs provided exit code and optional message, continues logging"""
+    def end(self, exit_code=0,text=''):
+        """Stops logging, logs provided exit code and optional text"""
+        self.logging = False
+        self._write("Exited with status: {code}. {msg}\n".format(code=exit_code,
+                                                                 msg=text
+                                                                ))
+        sys.stderr.close()
+        sys.stderr = sys.__stderr__
+
+
+    def exit_code(self, function, exit_code=0, text=''):
+        """Logs provided exit code and optional text, continues logging"""
         #TODO
+        raise NotImplementedError("Function not yet implemented")
+
+
+    def debug(self, text):
+        """
+        Logs with "debug" level
+
+        Detailed information (primarily used for debugging)
+        """
+        self.log(text,"debug")
+
+
+    def info(self, text):
+       """
+       Logs with "info" level
+
+       For general info relating to standard behaviour
+       """
+       self.log(text,"info")
+
+
+    def warning(self, text):
+        """
+        Logs with "warning" level
+
+        For errors that may change default behaviour
+        """
+        self.log(text,"warning")
+
+
+    def error(self, text):
+        """
+        Logs with "error" level
+
+        For errors that may alter the program's behaviour
+        """
+        self.log(text,"error")
+
+
+    def critical(self, text):
+        """
+        Logs with "critical" level (this is bad)
+
+        For errors that require the program to halt
+        """
+        self.log(text,"critical")
+
+
+class FormatError(Exception):
+    pass
