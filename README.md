@@ -44,6 +44,6 @@ To log to file:
 
     import simplelogger
 
-    logger = simplelogger.Logger(log_file="path/to/file")
+    logger = simplelogger.Logger(stream="path/to/file")
 
     logger.warning("this is logged to file")
