@@ -53,9 +53,6 @@ class Logger(object):
     """
     def __init__(self, stream=None, threshold=None, format=None):
         self._levels = ['debug', 'info', 'warning', 'error', 'critical']
-        self._output = None
-        self._threshold = None
-        self._stream = None
 
         if threshold == None:
             self._threshold = 'info'
@@ -73,7 +70,7 @@ class Logger(object):
                     os.makedirs(os.path.dirname(stream))
 
                 try:
-                    self._output = open(stream, 'a+')
+                    self._stream = open(stream, 'a+')
                     sys.stderr = open(stream, 'a+')
                 except IOError as e:
                     raise IOError("Could not open {stream}".format(stream=e.filename))
