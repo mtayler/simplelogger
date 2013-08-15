@@ -36,55 +36,73 @@ ERROR = 'error'
 CRITICAL = 'critical'
 
 
+class FormatError(Exception):
+    pass
+
+
 class Logger(object):
     """
-    Logger([log_file[, threshold[, format]]]) -> Logger object
+    Logger([stream[, threshold[, format[]]]) -> Logger object
 
     Provides a basic logging object.
 
     Args:
-        log_file: string - full path to log file
+        stream: string - full file path OR object - object implementing write and flush methods
         threshold: simplelogger constant - minimum level to log (eg simplelogger.INFO)
         format: string - custom logging format. See logging_format for more details
     """
-    def __init__(self, log_file=None, threshold=None, format=None):
-        self.__levels__ = ['debug', 'info', 'warning', 'error', 'critical']
+    def __init__(self, stream=None, threshold=None, format=None):
+        self._levels = ['debug', 'info', 'warning', 'error', 'critical']
+        self._output = None
+        self._threshold = None
+        self._stream = None
 
         if threshold == None:
-            self.__threshold__ = 'info'
+            self._threshold = 'info'
         else:
-            self.__threshold__ = threshold
+            self._threshold = threshold
 
-        if format == None:
-            self.__format__ = '{datetime}: {level}: {text}'
+        if format is None:
+            self._format = '{datetime}: {level}: {text}'
         else:
-            self.__format__ = format
+            self._format = format
 
-        if log_file:
-            if not os.path.exists(os.path.dirname(log_file)):
-                os.makedirs(os.path.dirname(log_file))
+        if stream is not None:
+            if isinstance(stream, basestring):
+                if not os.path.exists(os.path.dirname(stream)):
+                    os.makedirs(os.path.dirname(stream))
 
-            try:
-                self.output = open(log_file, 'a+')
-                sys.stderr = open(log_file, 'a+')
-            except IOError as e:
-                raise IOError("Could not open {log_file}".format(log_file=e.filename))
-        else:
-            self.output = sys.stdout
+                try:
+                    self._output = open(stream, 'a+')
+                    sys.stderr = open(stream, 'a+')
+                except IOError as e:
+                    raise IOError("Could not open {stream}".format(stream=e.filename))
+            else:
+
+                try:
+                    stream.write('')
+                    stream.flush()
+                    self._stream = stream
+                except AttributeError:
+                    raise AttributeError("Provided stream object is invalid, must implement write and flush methods")
+                except IOError:
+                    raise IOError("Cannot write to provided stream object")
+        elif stream is None:
+            self._output = sys.__stdout__
 
         self.info("Logging Started")
 
 
-    def __write__(self, text):
-        self.output.write(text+'\n')
-        self.output.flush()
+    def _write(self, text):
+        self._stream.write(text+'\n')
+        self._stream.flush()
 
-    def __above_threshold__(self, level):
-        for j in range(0,len(self.__levels__)-1):
-            if self.__levels__[j] == self.__threshold__:
+    def _above_threshold(self, level):
+        for j in range(0,len(self._levels)-1):
+            if self._levels[j] == self._threshold:
                 break;
-        for i in range(0,len(self.__levels__)-1):
-            if self.__levels__[i] == level:
+        for i in range(0,len(self._levels)-1):
+            if self._levels[i] == level:
                 break
 
         if i >= j:
@@ -93,7 +111,7 @@ class Logger(object):
             return False
 
     def set_threshold(self, threshold):
-        self.__threshold__ = threshold
+        self._threshold = threshold
 
     def logging_format(self, format):
         """
@@ -106,12 +124,12 @@ class Logger(object):
         Args:
             format: string - custom format used for logging.
         """
-        self.__format__ = format
+        self._format = format
 
 
     def log(self, log_level, text):
         """
-        Logs text to file or standard output
+        Logs text to file or standard _output
 
         For custom logging levels. It is recommended to use provided the provided
         functions for logging various levels:
@@ -121,9 +139,9 @@ class Logger(object):
             text: string - message to be displayed
             log_level: string - custom log level to be displayed
         """
-        if self.__above_threshold__(log_level):
+        if self._above_threshold(log_level):
             now = datetime.now()
-            self.__write__(self.__format__.format(time=now.time(), datetime=now,
+            self._write(self._format.format(time=now.time(), datetime=now,
                                                   date=date.today(),
                                                   level=log_level.upper(),
                                                   text=text
@@ -195,8 +213,6 @@ class Logger(object):
         Finishes current logging session
         """
         self.log("info","Finished.")
-        self.__write__('')
+        self._write('')
 
 
-class FormatError(Exception):
-    pass
