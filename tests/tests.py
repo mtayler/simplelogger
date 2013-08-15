@@ -50,6 +50,10 @@ class TestLevels(object):
         self.l.critical("test")
         assert self.stream.output[-1] == "CRITICAL\n"
 
+    def test_custom(self):
+        self.l.log("custom","test")
+        assert self.stream.output[-1] == "CUSTOM\n"
+
     def test_threshold(self):
         self.l.set_threshold("warning")
         self.l.info("test")
@@ -58,6 +62,11 @@ class TestLevels(object):
         output = self.stream.output[-1]
 
         assert output != "INFO\n" and output == "WARNING\n"
+
+        self.l.set_threshold("critical")
+        self.l.log("custom","test")
+
+        assert self.stream.output[-1] == "CUSTOM\n"
 
 
 class TestFormat(object):
