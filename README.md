@@ -5,7 +5,7 @@ SimpleLogger
 
 Very simple Python logging
 
-A small module used for basic logging purposes. Logs to console.
+A small module used for basic logging purposes.
 
 Installation:
 -------------
