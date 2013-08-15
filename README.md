@@ -37,7 +37,7 @@ To show lower log level threshold:
     import simplelogger
 
     // to log 'debug' level logs and up
-    logger = simplelogger.Logger(threshold=simplelogger.DEBUG)   // INFO level implicit
+    logger = simplelogger.Logger(threshold=simplelogger.DEBUG)
     logger.info("this has always logged")
     logger.debug("but this logs now")
 
