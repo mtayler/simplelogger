@@ -22,7 +22,7 @@ Eg.
     logger = simplelogger.Logger(threshold=simplelogger.INFO)
 
     logger.info("'This is logged with level info'")
-    logger.warning("This is logged with level 'warning'"
+    logger.warning("This is logged with level 'warning'")
 
 
 
@@ -44,6 +44,6 @@ To log to file:
 
     import simplelogger
 
-    logger = simplelogger.Logger(stream="path/to/file")
+    logger = simplelogger.Logger(stream="/path/to/file")
 
     logger.warning("this is logged to file")
