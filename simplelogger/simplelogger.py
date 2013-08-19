@@ -49,7 +49,7 @@ class Logger(object):
     Args:
         stream: string - full file path OR object - object implementing write and flush methods
         threshold: simplelogger constant - minimum level to log (eg simplelogger.INFO)
-        format: string - custom logging format. See logging_format for more details
+        format: string - custom logging format. See set_format for more details
     """
     def __init__(self, stream=None, threshold=None, format=None):
         self._levels = ['debug', 'info', 'warning', 'error', 'critical']
@@ -110,7 +110,7 @@ class Logger(object):
     def set_threshold(self, threshold):
         self._threshold = threshold
 
-    def logging_format(self, format):
+    def set_format(self, format):
         """
         Set custom log format
 
@@ -203,13 +203,3 @@ class Logger(object):
             text: string - text to log
         """
         self.log("critical",text)
-
-
-    def finish(self):
-        """
-        Finishes current logging session
-        """
-        self.log("info","Finished.")
-        self._write('')
-
-
