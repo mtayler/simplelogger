@@ -3,9 +3,9 @@ SimpleLogger
 
 [![PyPI version](https://badge.fury.io/py/SimpleLogger.png)](http://badge.fury.io/py/SimpleLogger)
 
-Very simple Python logging
+Small, simple, easy to use logging for Python.
 
-A small module used for basic logging purposes.
+A simple logging utility for simple logging. Supports many basic options such as output redirection to any object implementing `write()` and `flush` methods logging to file, and limited format customization.
 
 Installation:
 -------------
@@ -32,18 +32,17 @@ To log at custom log levels:
     logger.log("custom_log_level","text to log")
 
 
-To show change log level threshold:
+To change log level threshold:
 
     import simplelogger
 
     // to log 'debug' level logs and up
     logger = simplelogger.Logger(threshold=simplelogger.INFO)
-    logger.info("this will log")
+    logger.debug("this will log now!")
 
-    // to change threshold to 'error' level logs and up
+    // to log 'error' level logs and up
     logger = simplelogger.Logger(threshold=simplelogger.ERROR)
-    logger.debug("this will log now too!")
-
+    logger.info("this won't log now")
 
 
 To log to file:
