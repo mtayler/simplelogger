@@ -26,7 +26,7 @@ class TestLevels(object):
     def setup(self):
         self.stream = MockStream()
         self.l = simplelogger.Logger(stream=self.stream)
-        self.l.logging_format('{level}')
+        self.l.set_format('{level}')
 
     def test_info(self):
         self.l.info("test")
@@ -73,7 +73,7 @@ class TestFormat(object):
     def setup(self):
         self.stream = MockStream()
         self.l = simplelogger.Logger(stream=self.stream)
-        self.l.logging_format('{datetime} {date} {time} {level} {text}')
+        self.l.set_format('{datetime} {date} {time} {level} {text}')
 
     def test_all(self):
         self.l.info("test")
