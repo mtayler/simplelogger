@@ -17,7 +17,7 @@
 
 from distutils.core import setup
 
-__version__ = '1.4.3'
+__version__ = '1.4.4'
 
 setup(name='SimpleLogger',
       version=__version__,

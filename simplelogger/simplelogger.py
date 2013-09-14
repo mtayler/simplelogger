@@ -86,7 +86,7 @@ class Logger(object):
 	else:
             self._stream = sys.__stdout__
 
-        self.info("\nLogging Started")
+        self._new("Logging Started")
 
 
     def _write(self, text):
@@ -122,7 +122,6 @@ class Logger(object):
         """
         self._format = format
 
-
     def log(self, log_level, text):
         """
         Logs text to file or standard _output
@@ -138,11 +137,18 @@ class Logger(object):
         if self._above_threshold(log_level):
             now = datetime.now()
             self._write(self._format.format(time=now.time(), datetime=now,
-                                                  date=date.today(),
-                                                  level=log_level.upper(),
-                                                  text=text
-                                                 ))
+                                            date=date.today(),
+                                            level=log_level.upper(),
+                                            text=text
+                                            ))
 
+    def _new(self,text):
+        now = datetime.now()
+        self._write("\n"+self._format.format(time=now.time(), datetime=now,
+                                            date=date.today(),
+                                            level=self._threshold.upper(),
+                                            text=text
+                                            ))
 
     def debug(self, text):
         """
@@ -155,7 +161,6 @@ class Logger(object):
         """
         self.log("debug",text)
 
-
     def info(self, text):
         """
         Logs with "info" level
@@ -166,7 +171,6 @@ class Logger(object):
             text: string - text to log
         """
         self.log("info",text)
-
 
     def warning(self, text):
         """
@@ -179,7 +183,6 @@ class Logger(object):
         """
         self.log("warning",text)
 
-
     def error(self, text):
         """
         Logs with "error" level
@@ -190,7 +193,6 @@ class Logger(object):
             text: string - text to log
         """
         self.log("error",text)
-
 
     def critical(self, text):
         """
