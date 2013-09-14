@@ -87,7 +87,7 @@ class Logger(object):
         elif stream is None:
             self._output = sys.__stdout__
 
-        self.info("Logging Started")
+        self.info("\nLogging Started")
 
 
     def _write(self, text):
