@@ -75,7 +75,6 @@ class Logger(object):
                 except IOError as e:
                     raise IOError("Could not open {stream}".format(stream=e.filename))
             else:
-
                 try:
                     stream.write('')
                     stream.flush()
@@ -84,8 +83,8 @@ class Logger(object):
                     raise AttributeError("Provided stream object is invalid, must implement write and flush methods")
                 except IOError:
                     raise IOError("Cannot write to provided stream object")
-        elif stream is None:
-            self._output = sys.__stdout__
+	else:
+            self._stream = sys.__stdout__
 
         self.info("\nLogging Started")
 
