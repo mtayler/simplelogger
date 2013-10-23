@@ -27,6 +27,11 @@ Valid subsitution directives include:
 | {text}     | The text to be logged     |
 +------------+---------------------------+
 
+Installation:
+-------------
+``pip install simplelogger``
+
+
 Examples:
 ---------
 **Basic usage:**
@@ -45,3 +50,5 @@ Examples:
     else:
         # change the format to output the logged text, the date and time, and the time separated by characters
         logger.set_format("{text}: {datetime} - {time}")
+
+See `the GitHub page <https://github.com/tamul/simplelogger/>`_. for more information.
