@@ -5,7 +5,7 @@ SimpleLogger
 
 Small, simple, easy to use logging for Python.
 
-A simple logging utility for simple logging. Supports many basic options such as output redirection to any object implementing `write()` and `flush()` methods logging to file, and limited format customization.
+I felt the defualt Python logging module was too bulky for most of the scripts I write. So I decided to write my own, incredibly simple logging utility. It supports many basic options such as output redirection to custom objects, logging to file (through output redirection), and format customization!
 
 Installation:
 -------------
