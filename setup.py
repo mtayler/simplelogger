@@ -17,7 +17,7 @@
 
 from distutils.core import setup
 
-__version__ = '1.4.5'
+__version__ = '1.4.6'
 
 with open('README.txt') as file:
     long_description = file.read()
@@ -26,11 +26,12 @@ setup(name='SimpleLogger',
       version=__version__,
       classifiers=[
           'Programming Language :: Python',
-          'Programming Language :: Python :: 3'
+          'Programming Language :: Python :: 3',
+          'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)'
           ],
       packages=['simplelogger'],
       description='Simple Logging Utility',
       author='Tayler Mulligan',
       author_email='mulligantayler@gmail.com',
-      url='https://github.com/tamul/simplelogger'
+      url='https://github.com/tamul/simplelogger',
      )
