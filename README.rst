@@ -1,6 +1,7 @@
 SimpleLogger is a basic logging utility for Python. I find the default Python logging module powerful, but extremely clunky and difficult to setup quickly. SimpleLogger supports basics such as output redirection, custom logging format, and logging levels.
 
-
+Usage:
+======
 Log Levels and Threshold:
 --------------------------
 The current threshold that determines what level of log entries can be seen is set through ``Logger.set_threshold``, passing a constant as the argument. Level constants include DEBUG, INFO, WARNING, ERROR, and CRITICAL. Changing the threshold only affects future entries.
@@ -26,7 +27,7 @@ Valid subsitution directives include:
 +------------+---------------------------+
 
 Installation:
--------------
+=============
 Recommended:::
     pip install simplelogger
 Manual:::
@@ -34,7 +35,7 @@ Manual:::
 
 
 Examples:
----------
+=========
 **Basic usage:**::
     import simplelogger
 
@@ -52,7 +53,7 @@ Examples:
         logger.set_format("{text}: {datetime} - {time}")
 
 License
-=======
+-------
 Copyright (C) 2013  Tayler Mulligan
 
 This program is free software: you can redistribute it and/or modify
