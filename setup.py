@@ -19,7 +19,7 @@ from distutils.core import setup
 
 __version__ = '1.4.6'
 
-with open('README.txt') as file:
+with open('README.rst') as file:
     long_description = file.read()
 
 setup(name='SimpleLogger',
