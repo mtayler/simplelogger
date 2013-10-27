@@ -28,11 +28,11 @@ Valid subsitution directives include:
 
 Installation:
 =============
-**Recommended:**:: 
+**Recommended:** ::
 
     pip install simplelogger
 
-**Manual:**::
+**Manual:** ::
 
     sudo python ./setup.py install
 
