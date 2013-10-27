@@ -32,4 +32,5 @@ setup(name='SimpleLogger',
       author='Tayler Mulligan',
       author_email='mulligantayler@gmail.com',
       url='https://github.com/tamul/simplelogger',
+      license='GNU GPL v3'
      )
