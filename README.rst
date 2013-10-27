@@ -36,9 +36,9 @@ Installation:
 
     pip install simplelogger
 
-**Manual:** ::
+**The Hard Way:** ::
 
-    sudo python ./setup.py install
+    python setup.py install
 
 
 Examples:
