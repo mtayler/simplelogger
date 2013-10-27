@@ -12,31 +12,35 @@ Logging formats are set through ``Logger.set_format``, passing a string of valid
 
 Valid subsitution directives include:
 
-+------------+---------------------------+
-|  Directive | Substitution              |
-+============+===========================+
-| {time}     | The current time          |
-+------------+---------------------------+
-| {datetime} | The current date and time |
-+------------+---------------------------+
-| {date}     | The current date          |
-+------------+---------------------------+
-| {level}    | The level of the entry    |
-+------------+---------------------------+
-| {text}     | The text to be logged     |
-+------------+---------------------------+
++------------+-----------------------------+
+|  Directive | Substitution                |
++============+=============================+
+| {time}     | The current time            |
++------------+-----------------------------+
+| {datetime} | The current date and time   |
++------------+-----------------------------+
+| {date}     | The current date            |
++------------+-----------------------------+
+| {level}    | The level of the entry      |
++------------+-----------------------------+
+| {text}     | The text to be logged       |
++------------+-----------------------------+
 
 Installation:
 =============
-Recommended:::
+**Recommended:**:: 
+
     pip install simplelogger
-Manual:::
+
+**Manual:**::
+
     sudo python ./setup.py install
 
 
 Examples:
 =========
 **Basic usage:**::
+
     import simplelogger
 
     # make a new logger that outputs to output_file.log, has a threshold of DEBUG, and the entry format is just the text to be logged
