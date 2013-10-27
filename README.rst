@@ -1,4 +1,8 @@
-SimpleLogger is a basic logging utility for Python. I find the default Python logging module powerful, but extremely clunky and difficult to setup quickly. SimpleLogger supports basics such as output redirection, custom logging format, and logging levels.
+=============
+SimpleLogger
+=============
+
+SimpleLogger is a simple logging utility for Python. I find the default Python logging module powerful, but extremely clunky and difficult to setup quickly. SimpleLogger supports basics such as output redirection, custom logging format, and logging levels.
 
 Usage:
 ======
