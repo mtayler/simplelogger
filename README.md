@@ -9,7 +9,9 @@ I felt the defualt Python logging module was too bulky for most of the scripts I
 
 Installation:
 -------------
-Use included setup.py (`python setup.py install`)
+**Recommended:** Use `pip install simplelogger`
+
+**The hard way:** Use the included setup.py (`python setup.py install`)
 
 Usage:
 ------
