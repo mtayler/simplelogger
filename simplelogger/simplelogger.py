@@ -65,9 +65,9 @@ class Logger(object):
             self.set_threshold(threshold)
 
         if format is None:
-            self._format = '{datetime}: {level}: {text}'
+            self.set_format('{datetime}: {level}: {text}')
         else:
-            self._format = format
+            self.set_format(format)
 
         if stream is not None:
             if isinstance(stream, basestring):
