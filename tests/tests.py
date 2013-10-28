@@ -1,6 +1,6 @@
 import simplelogger
 import re
-
+from nose.tools import *
 
 class MockStream(object):
     def __init__(self):
@@ -13,6 +13,33 @@ class MockStream(object):
     def flush(self):
         self.output.append(self.buffer)
 
+class NoWriteStream(object):
+    def flush(self):
+        pass
+
+class NoFlushStream(object):
+    def write(self,text):
+        pass
+
+class TestIO(object):
+    @raises(AttributeError)
+    def test_stream_with_no_write(self):
+        no_write_stream = NoWriteStream()
+        logger = simplelogger.Logger(stream=no_write_stream)
+
+    @raises(AttributeError)
+    def test_stream_with_no_flush(self):
+        no_flush_stream = NoFlushStream()
+        logger = simplelogger.Logger(stream=no_flush_stream)
+
+    def test_file_as_stream(self):
+        logger = simplelogger.Logger(stream="tests/log_file.log")
+        logger.debug("test")
+
+    def test_stream_as_stream(self):
+        stream = MockStream()
+        logger = simplelogger.Logger(stream=stream)
+
 class TestBasics(object):
     def test_output(self):
         stream = MockStream()
@@ -20,7 +47,6 @@ class TestBasics(object):
         logger.info("test")
         output = stream.output[-1].split()
         assert output[-1] == "test"
-
 
 class TestLevels(object):
     def setup(self):
@@ -67,7 +93,6 @@ class TestLevels(object):
         self.l.log("custom","test")
 
         assert self.stream.output[-1] == "CUSTOM\n"
-
 
 class TestFormat(object):
     def setup(self):
