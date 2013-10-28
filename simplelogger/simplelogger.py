@@ -29,11 +29,11 @@ import os
 
 from datetime import datetime, date, time
 
-DEBUG = 'debug'
-INFO = 'info'
-WARNING = 'warning'
-ERROR = 'error'
-CRITICAL = 'critical'
+DEBUG = 'DEBUG'
+INFO = 'INFO'
+WARNING = 'WARNING'
+ERROR = 'ERROR'
+CRITICAL = 'CRITICAL'
 
 class Logger(object):
     """
