@@ -32,7 +32,7 @@ setup(name='SimpleLogger',
       description='Simple Logging Utility',
       long_description = readme,
       author='Tayler Mulligan',
-      author_email='mulligantayler@gmail.com',
+      author_email='tamul@tamul.me',
       url='https://github.com/tamul/simplelogger',
       license='GNU GPL v3'
      )
